@@ -33,21 +33,19 @@ export interface SiteContent {
   contact: {
     title: string;
     subtitle: string;
-    phone: string; // Placeholder
-    email: string; // Placeholder
+    phone: string;
+    email: string;
   };
 }
 
 export interface RetreatContent {
-  hero: {
-    title: string;
-    subtitle: string;
-    dateDescription: string;
-  };
-  intro: {
-    title: string;
-    description: string[];
-  };
+  id: string;
+  slug: string;
+  title: string;
+  subtitle: string;
+  tagline: string;
+  heroImage: string;
+  intro: string[];
   audience: {
     title: string;
     points: string[];
@@ -69,5 +67,6 @@ export interface RetreatContent {
   details: {
     location: string;
     price: string;
+    duration: string;
   };
 }

@@ -9,7 +9,7 @@ export const About = () => {
   }, []);
 
   return (
-    <div className="pt-24 pb-16 min-h-screen bg-white">
+    <div className="pb-16 min-h-screen bg-white">
       {/* Header */}
       <section className="bg-brand-50 py-16 mb-16">
         <div className="container mx-auto px-4 text-center">

@@ -25,8 +25,8 @@ export const ServiceDetail = () => {
 
   return (
     <div className="min-h-screen bg-white pb-20">
-      {/* Hero Image */}
-      <div className="h-[50vh] min-h-[400px] relative overflow-hidden">
+      {/* Hero Image - Height adjusted for visibility below navbar */}
+      <div className="h-[40vh] min-h-[350px] relative overflow-hidden bg-brand-50">
         <motion.img 
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
@@ -35,11 +35,9 @@ export const ServiceDetail = () => {
           alt={service.title} 
           className="w-full h-full object-cover"
         />
-        {/* Strong Light Overlay for Dark Text - Increased to 60% */}
-        <div className="absolute inset-0 bg-white/60"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-50 via-white/20 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-white/10 to-transparent"></div>
         
-        <div className="absolute bottom-0 left-0 w-full px-6 pb-24 pt-10 md:p-16 text-brand-900 container mx-auto">
+        <div className="absolute bottom-0 left-0 w-full px-6 pb-12 pt-10 md:p-16 text-brand-900 container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -48,14 +46,14 @@ export const ServiceDetail = () => {
             <Link to="/" className="inline-flex items-center text-brand-800 mb-6 hover:text-brand-600 transition-colors font-bold tracking-wide">
               <ArrowRight size={20} className="ml-2 stroke-[3px]" /> חזרה לדף הבית
             </Link>
-            <h1 className="text-5xl md:text-8xl font-black mb-6 text-brand-900 tracking-tight">{service.title}</h1>
-            <p className="text-xl md:text-3xl text-brand-800 max-w-3xl font-bold leading-tight">{service.shortDescription}</p>
+            <h1 className="text-5xl md:text-7xl font-black mb-4 text-brand-900 tracking-tight">{service.title}</h1>
+            <p className="text-xl md:text-2xl text-brand-800 max-w-3xl font-bold leading-tight">{service.shortDescription}</p>
           </motion.div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-8 -mt-10 relative z-10">
-        <div className="bg-white rounded-t-[3rem] p-8 md:p-12 shadow-2xl max-w-6xl mx-auto border border-gray-100">
+      <div className="container mx-auto px-4 md:px-8 mt-12 relative z-10">
+        <div className="bg-white p-4 md:p-0 max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             
             <div className="lg:col-span-2 space-y-8">

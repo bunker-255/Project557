@@ -40,7 +40,7 @@ export const Gallery = () => {
   }, [lightboxIndex, nextImage, prevImage]);
 
   return (
-    <div className="pt-24 pb-16 min-h-screen bg-brand-50/30">
+    <div className="pb-16 min-h-screen bg-brand-50/30">
       
       {/* Header */}
       <section className="bg-brand-50 py-16 mb-16">

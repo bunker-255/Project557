@@ -6,6 +6,9 @@ import { About } from './pages/About';
 import { ServiceDetail } from './pages/ServiceDetail';
 import { Contact } from './pages/Contact';
 import { Gallery } from './pages/Gallery';
+import { Retreats } from './pages/Retreats';
+import { RetreatDetail } from './pages/RetreatDetail';
+import { Services } from './pages/Services';
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="gallery" element={<Gallery />} />
+          <Route path="services" element={<Services />} />
+          <Route path="retreats" element={<Retreats />} />
+          <Route path="retreat/:slug" element={<RetreatDetail />} />
           <Route path="service/:slug" element={<ServiceDetail />} />
           <Route path="contact" element={<Contact />} />
         </Route>
