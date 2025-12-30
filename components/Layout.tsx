@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import { Menu, X, Instagram, Facebook, Mail, Phone, MessageCircle, Youtube, ArrowUp, Sparkles } from 'lucide-react';
-import { IMAGES, SERVICES, SITE_CONTENT, WHATSAPP_URL, SPOTIFY_URL, YOUTUBE_URL } from '../data';
+import { Menu, X, Instagram, Facebook, Mail, Phone, MessageCircle, Youtube, ArrowUp, Sparkles, Music } from 'lucide-react';
+import { IMAGES, SERVICES, SITE_CONTENT, WHATSAPP_URL, SPOTIFY_URL, YOUTUBE_URL, INSTAGRAM_URL, TIKTOK_URL, FACEBOOK_URL } from '../data';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 
 const ScrollToTopButton = () => {
@@ -222,10 +222,15 @@ const Footer = () => {
               אבחון מדויק בשיטה ייחודית "נומרוליסטי" ומכלול של התמחויות לשיפור איכות החיים ואיזון הגוף והנפש.
             </p>
             <div className="flex gap-4 pt-4">
-              <a href={SPOTIFY_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><MessageCircle size={20} /></a>
-              <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Youtube size={20} /></a>
-              <a href="#" className="hover:text-white transition-colors"><Instagram size={20} /></a>
-              <a href="#" className="hover:text-white transition-colors"><Facebook size={20} /></a>
+              <a href={SPOTIFY_URL} target="_blank" rel="noopener noreferrer" title="Spotify" className="hover:text-white transition-colors"><Music size={20} /></a>
+              <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer" title="YouTube" className="hover:text-white transition-colors"><Youtube size={20} /></a>
+              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" title="Instagram" className="hover:text-white transition-colors"><Instagram size={20} /></a>
+              <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" title="TikTok" className="hover:text-white transition-colors">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="inline-block">
+                  <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+                </svg>
+              </a>
+              <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" title="Facebook" className="hover:text-white transition-colors"><Facebook size={20} /></a>
             </div>
           </div>
 
