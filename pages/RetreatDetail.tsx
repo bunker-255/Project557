@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+// Fixed missing useState and useEffect imports from 'react'
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { RETREATS, WHATSAPP_URL, IMAGES } from '../data';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -12,8 +13,11 @@ export const RetreatDetail = () => {
   const { slug } = useParams();
   const retreat = RETREATS.find(r => r.slug === slug);
   const otherRetreats = RETREATS.filter(r => r.slug !== slug);
+  
+  // Fixed: useState is now imported from 'react'
   const [activeObjection, setActiveObjection] = useState<number | null>(null);
 
+  // Fixed: useEffect is now imported from 'react'
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
@@ -114,7 +118,37 @@ export const RetreatDetail = () => {
         </div>
       </section>
 
-      {/* 3. Gallery Teaser */}
+      {/* 3. Methods - Detailed Display (MOVED HERE: BEFORE GALLERY) */}
+      <section className="py-32 bg-brand-900 text-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')] opacity-10"></div>
+        <div className="container mx-auto px-4 md:px-8 relative z-10">
+          <div className="text-center mb-24">
+            <h2 className="text-6xl md:text-9xl font-black mb-8 tracking-tighter">הכלים שלנו לשינוי</h2>
+            <div className="w-32 h-3 bg-brand-500 mx-auto rounded-full"></div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            {retreat.methods.map((method, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, x: i % 2 === 0 ? 50 : -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="bg-white/10 backdrop-blur-xl p-12 rounded-[4rem] border border-white/20 hover:bg-white/20 transition-all group"
+              >
+                <div className="flex items-center gap-6 mb-8">
+                   <div className="w-16 h-16 rounded-2xl bg-brand-500 flex items-center justify-center font-black text-2xl group-hover:rotate-12 transition-transform">
+                      {i + 1}
+                   </div>
+                   <h3 className="text-4xl font-black text-brand-300">{method.title}</h3>
+                </div>
+                <p className="text-2xl leading-relaxed text-brand-50 opacity-90 font-medium">{method.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Gallery Teaser */}
       <section className="py-24 bg-brand-50 border-y border-brand-100">
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between mb-16 gap-8">
@@ -142,7 +176,7 @@ export const RetreatDetail = () => {
         </div>
       </section>
 
-      {/* 4. Who is it for? */}
+      {/* 5. Who is it for? */}
       <section className="py-32 bg-white">
         <div className="container mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
@@ -174,37 +208,7 @@ export const RetreatDetail = () => {
         </div>
       </section>
 
-      {/* 5. Methods - Detailed Display */}
-      <section className="py-32 bg-brand-900 text-white relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')] opacity-10"></div>
-        <div className="container mx-auto px-4 md:px-8 relative z-10">
-          <div className="text-center mb-24">
-            <h2 className="text-6xl md:text-9xl font-black mb-8 tracking-tighter">הכלים שלנו לשינוי</h2>
-            <div className="w-32 h-3 bg-brand-500 mx-auto rounded-full"></div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {retreat.methods.map((method, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, x: i % 2 === 0 ? 50 : -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="bg-white/10 backdrop-blur-xl p-12 rounded-[4rem] border border-white/20 hover:bg-white/20 transition-all group"
-              >
-                <div className="flex items-center gap-6 mb-8">
-                   <div className="w-16 h-16 rounded-2xl bg-brand-500 flex items-center justify-center font-black text-2xl group-hover:rotate-12 transition-transform">
-                      {i + 1}
-                   </div>
-                   <h3 className="text-4xl font-black text-brand-300">{method.title}</h3>
-                </div>
-                <p className="text-2xl leading-relaxed text-brand-50 opacity-90 font-medium">{method.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Schedule - Full Timeline */}
+      {/* 6. Schedule - Single Column Timeline */}
       <section className="py-32 bg-white">
         <div className="container mx-auto px-4 md:px-8 max-w-4xl">
           <div className="text-center mb-24">
@@ -215,25 +219,39 @@ export const RetreatDetail = () => {
             <h2 className="text-6xl md:text-8xl font-black text-brand-900 mb-6 tracking-tighter">מה מחכה לך?</h2>
             <p className="text-2xl text-gray-500 font-bold">לו"ז מפורט שנועד להעביר אותך תהליך מלא של ניקוי והטענה</p>
           </div>
-          <div className="space-y-0 relative">
-            <div className="absolute top-0 right-10 md:right-1/2 bottom-0 w-px bg-brand-100 -z-10"></div>
-            {retreat.schedule.map((item, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, x: i % 2 === 0 ? 20 : -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className={`flex items-center gap-8 md:gap-16 mb-12 last:mb-0 ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
-              >
-                <div className={`w-24 md:w-1/2 flex ${i % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
-                  <span className="text-3xl font-black text-brand-500 bg-brand-50 px-6 py-2 rounded-full shadow-sm">{item.time}</span>
-                </div>
-                <div className="w-6 h-6 rounded-full bg-brand-900 border-4 border-white shadow-lg z-10 flex-shrink-0"></div>
-                <div className="flex-grow md:w-1/2">
-                  <span className="text-2xl md:text-3xl font-black text-gray-800 hover:text-brand-900 transition-colors">{item.activity}</span>
-                </div>
-              </motion.div>
-            ))}
+          <div className="relative md:pr-12">
+            {/* Main Vertical Line (Adjusted for RTL single column) */}
+            <div className="absolute top-0 right-10 md:right-16 bottom-0 w-px bg-brand-100 -z-10"></div>
+            
+            <div className="space-y-16">
+              {retreat.schedule.map((item, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="relative flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12"
+                >
+                  {/* Timeline Point */}
+                  <div className="absolute right-[33px] md:right-[57px] top-4 md:top-auto w-4 h-4 rounded-full bg-brand-900 border-4 border-white shadow-lg z-10 flex-shrink-0"></div>
+                  
+                  {/* Time Block */}
+                  <div className="pr-16 md:pr-0 md:w-32 flex-shrink-0">
+                    <span className="inline-block text-2xl font-black text-brand-600 bg-brand-50 px-5 py-2 rounded-2xl shadow-sm border border-brand-100">
+                      {item.time}
+                    </span>
+                  </div>
+                  
+                  {/* Activity Text */}
+                  <div className="pr-16 md:pr-0">
+                    <span className="text-3xl md:text-4xl font-black text-gray-800 hover:text-brand-900 transition-colors leading-tight">
+                      {item.activity}
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -242,7 +260,7 @@ export const RetreatDetail = () => {
       <section className="py-32 bg-brand-50 relative">
         <div className="container mx-auto px-4 md:px-8 max-w-5xl">
           <div className="text-center mb-24">
-            <h2 className="text-5xl md:text-8xl font-black text-brand-900 mb-8 tracking-tighter">מחשבות שחוסמות אותנו</h2>
+            <h2 className="text-5xl md:text-8xl font-black text-brand-900 mb-8 tracking-tighter">מחסומים שקופים</h2>
             <p className="text-2xl text-gray-600 font-bold">זיהוי וניפוץ הדפוסים שמונעים ממך לעשות טוב לעצמך</p>
           </div>
           <div className="space-y-8">

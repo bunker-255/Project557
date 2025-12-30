@@ -1,15 +1,18 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { SITE_CONTENT, IMAGES, SERVICES, TESTIMONIALS, WHATSAPP_URL, RETREATS, LANDING_CONTENT } from '../data';
 import { ArrowLeft, Quote, Heart, X, ChevronRight, ChevronLeft, MessageCircle, Sparkles, CheckCircle2, Activity, BatteryCharging, Compass, Camera } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const fadeIn = {
+// Added explicit Variants type to fix ease string literal inference
+const fadeIn: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
 };
 
-const staggerContainer = {
+// Added explicit Variants type for consistency
+const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -209,8 +212,7 @@ export const Home = () => {
                  viewport={{ once: true }}
                  className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-brand-500 text-white text-sm font-black tracking-widest mb-10 uppercase shadow-2xl"
                >
-                  <Sparkles size={20} />
-                  <span>אירוע קרוב ומיוחד</span>
+                  <span className="flex items-center gap-2"><Sparkles size={20} /> אירוע קרוב ומיוחד</span>
                </motion.div>
                <h2 className="text-6xl md:text-9xl font-black mb-10 tracking-tighter leading-none text-brand-50">
                 {featuredRetreat.title}
@@ -335,7 +337,7 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* 8. TESTIMONIALS - Heartfelt Words */}
+      {/* 8. TESTIMONIALS - Heartfelt Words (Optimized for Desktop) */}
       <section className="py-32 bg-brand-900 text-white relative overflow-hidden">
         <div className="absolute -top-20 -left-20 w-96 h-96 bg-brand-500 rounded-full blur-[150px] opacity-20"></div>
         <div className="container mx-auto px-4 md:px-8 relative z-10">
@@ -344,22 +346,24 @@ export const Home = () => {
             <div className="w-24 h-2 bg-brand-400 mx-auto rounded-full"></div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {TESTIMONIALS.map((t) => (
               <motion.div 
                 key={t.id} 
                 initial={{ opacity: 0, scale: 0.95 }} 
                 whileInView={{ opacity: 1, scale: 1 }} 
                 viewport={{ once: true }} 
-                className="bg-white/10 backdrop-blur-xl p-16 rounded-[4rem] border border-white/20 relative"
+                className="bg-white/10 backdrop-blur-xl p-8 md:p-10 rounded-[3rem] border border-white/15 relative flex flex-col justify-between"
               >
-                <Quote className="text-brand-300 mb-12 opacity-50" size={64} />
-                <p className="text-2xl md:text-3xl leading-relaxed mb-12 font-medium italic">"{t.text}"</p>
-                <div className="flex items-center gap-6">
-                  <div className="w-16 h-16 rounded-full bg-brand-500 flex items-center justify-center font-black text-2xl text-white shadow-lg">
+                <div>
+                  <Quote className="text-brand-300 mb-8 opacity-40" size={40} />
+                  <p className="text-lg md:text-xl leading-relaxed mb-10 font-medium italic opacity-95">"{t.text}"</p>
+                </div>
+                <div className="flex items-center gap-4 mt-auto pt-6 border-t border-white/5">
+                  <div className="w-12 h-12 rounded-full bg-brand-500 flex items-center justify-center font-black text-lg text-white shadow-md flex-shrink-0">
                     {t.author.charAt(0)}
                   </div>
-                  <span className="font-black text-brand-100 text-2xl tracking-wide">{t.author}</span>
+                  <span className="font-black text-brand-100 text-xl tracking-wide">{t.author}</span>
                 </div>
               </motion.div>
             ))}
